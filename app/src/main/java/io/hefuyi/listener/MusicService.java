@@ -2316,7 +2316,7 @@ public class MusicService extends Service {
                                     service.mPausedByTransientLossOfFocus =
                                             msg.arg1 == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
                                 }
-                                service.pause();
+//                                service.pause();
                                 break;
                             case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
                                 removeMessages(FADEUP);
