@@ -1,5 +1,18 @@
 # ListenerMusicPlayer
 
+修改:
+1. 读取本地歌词文件 lrc,和 mp3 放在同一目录,且和 mp3 文件名一致.
+2. 歌词文件解析,增加 <br> 标签识别.
+3. 歌词显示支持长词多行显示,如果一句歌词很长会分行显示.
+4. 修复歌词高亮显示的 bug. 见: https://github.com/hefuyicoder/ListenerMusicPlayer/issues/26
+
+TODO:
+1. 桌面歌词
+2. 细节优化
+
+以下是原 readme
+---
+
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/hefuyicoder/ListenerMusicPlayer#license)
 [![platform](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
