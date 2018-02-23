@@ -127,6 +127,8 @@ public class QuickControlsFragment extends Fragment implements QuickControlsCont
     TextView minuteColon;
     @BindView(R.id.song_elapsedtime)
     LinearLayout songElapsedTime;
+    @BindView(R.id.seek_song_volume)
+    SeekBar songVolumeSeekBar;
 
     private int blackWhiteColor;
     private Handler mElapsedTimeHandler;
@@ -263,6 +265,24 @@ public class QuickControlsFragment extends Fragment implements QuickControlsCont
 
         subscribeFavourateSongEvent();
         subscribeMetaChangedEvent();
+
+        // volume
+        songVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                MusicPlayer.setVolume(progress / 100F);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override

@@ -240,6 +240,15 @@ public class MusicPlayer {
         return -1;
     }
 
+    public static void setVolume(float vol) {
+        if (mService != null) {
+            try {
+                mService.setVolume(vol);
+            } catch (final RemoteException ignored) {
+            }
+        }
+    }
+
     public static int getAudioSessionId() {
         if (mService != null) {
             try {

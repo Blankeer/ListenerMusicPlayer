@@ -457,6 +457,7 @@ public class MusicService extends Service {
 
     /**
      * 处理MediaButtonIntentReceiver 和 notification触发的媒体按钮点击事件
+     *
      * @param intent
      */
     private void handleCommandIntent(Intent intent) {
@@ -624,6 +625,7 @@ public class MusicService extends Service {
 
     /**
      * 停止播放
+     *
      * @param goToIdle 是否准备关闭service
      */
     private void stop(final boolean goToIdle) {
@@ -644,8 +646,9 @@ public class MusicService extends Service {
 
     /**
      * 从播放队列中删除若干的对象,并调整当前播放曲目的位置
+     *
      * @param first 删除的其实位置
-     * @param last 删除的结束位置
+     * @param last  删除的结束位置
      * @return 删除的数量
      */
     private int removeTracksInternal(int first, int last) {
@@ -713,8 +716,9 @@ public class MusicService extends Service {
 
     /**
      * 在指定位置插入播放列表
+     *
      * @param list
-     * @param position -1 清空原播放列表
+     * @param position   -1 清空原播放列表
      * @param sourceId
      * @param sourceType
      */
@@ -749,6 +753,7 @@ public class MusicService extends Service {
 
     /**
      * 更新mCursor和mAlbumCursor,前者指向当前播放曲目的相关信息,后者指向对应专辑的相关信息
+     *
      * @param selection
      * @param selectionArgs
      */
@@ -763,6 +768,7 @@ public class MusicService extends Service {
 
     /**
      * 同上,输入参数为uri
+     *
      * @param uri
      */
     private void updateCursor(final Uri uri) {
@@ -814,6 +820,7 @@ public class MusicService extends Service {
 
     /**
      * 准备当前或者下一首能够播放的曲目(设置mplayer)
+     *
      * @param openNext 是否给player提前设置下一首
      */
     private void openCurrentAndMaybeNext(final boolean openNext) {
@@ -868,6 +875,7 @@ public class MusicService extends Service {
 
     /**
      * 发送广播,表示获取歌名出错
+     *
      * @param trackName
      */
     private void sendErrorMessage(final String trackName) {
@@ -878,6 +886,7 @@ public class MusicService extends Service {
 
     /**
      * 获取下一首播放的曲目ID,SHUFFLE_NORMAL在当前播放队列中随机选取下一首,SHUFFLE_AUTO则自动根据播放列表长度,从设备中自动选取曲目,自动补充到尾部
+     *
      * @param force 控制播放列表播放完时是否重新开始
      * @return -1表示无法确定下一曲目位置
      */
@@ -973,6 +982,7 @@ public class MusicService extends Service {
 
     /**
      * 设置下首播放曲目的位置,并设置mplayer下次播放的datasource
+     *
      * @param position
      */
     private void setNextTrack(int position) {
@@ -988,6 +998,7 @@ public class MusicService extends Service {
 
     /**
      * 在mAutoShuffleList中保存设备中所有曲目的ID
+     *
      * @return
      */
     private boolean makeAutoShuffleList() {
@@ -1052,6 +1063,7 @@ public class MusicService extends Service {
 
     /**
      * 遍历播放记录列表,最近的若干个记录中是否存在某个歌曲ID
+     *
      * @param idx
      * @param lookbacksize
      * @return
@@ -1083,6 +1095,7 @@ public class MusicService extends Service {
      * 当播放队列变动时,发送QUEUE_CHANGED
      * 当切换歌曲时,发送META_CHANGED
      * 调用setShuffle设置SHUFFLEMODE时,发送SHUFFLEMODE_CHANGED
+     *
      * @param what
      */
     private void notifyChange(final String what) {
@@ -1139,6 +1152,7 @@ public class MusicService extends Service {
 
     /**
      * 更新PlaybackStateCompat
+     *
      * @param what
      */
     private void updateMediaSession(final String what) {
@@ -1189,6 +1203,7 @@ public class MusicService extends Service {
 
     /**
      * 构建Notification
+     *
      * @return
      */
     private Notification buildNotification() {
@@ -1241,7 +1256,7 @@ public class MusicService extends Service {
                     .setShowActionsInCompactView(0, 1, 2, 3);
             builder.setStyle(style);
         }
-        if (artwork != null && ListenerUtil.isLollipop()){
+        if (artwork != null && ListenerUtil.isLollipop()) {
             builder.setColor(Palette.from(artwork).generate().getMutedColor(ATEUtil.getThemePrimaryColor(getApplicationContext())));
         }
 
@@ -1250,6 +1265,7 @@ public class MusicService extends Service {
 
     /**
      * 点击了UI上的媒体按键,发送事件给MusicService
+     *
      * @param action
      * @return
      */
@@ -1263,6 +1279,7 @@ public class MusicService extends Service {
 
     /**
      * 保存播放队列的相关信息
+     *
      * @param full true表示同时保存cardid
      */
     private void saveQueue(final boolean full) {
@@ -1361,6 +1378,7 @@ public class MusicService extends Service {
 
     /**
      * 根据path通过多种方式来获取歌曲的信息,初始化player
+     *
      * @param path
      * @return
      */
@@ -1499,6 +1517,7 @@ public class MusicService extends Service {
 
     /**
      * 设置随机模式
+     *
      * @param shufflemode
      */
     public void setShuffleMode(final int shufflemode) {
@@ -1543,6 +1562,7 @@ public class MusicService extends Service {
 
     /**
      * 删除播放队列中的曲目,并发送通知
+     *
      * @param id
      * @return
      */
@@ -1576,6 +1596,7 @@ public class MusicService extends Service {
 
     /**
      * 删除播放队列中的曲目,并发送通知
+     *
      * @param first
      * @param last
      * @return
@@ -1596,6 +1617,7 @@ public class MusicService extends Service {
 
     /**
      * 设置当前播放曲目的序号,可能更新播放列表
+     *
      * @param index
      */
     public void setQueuePosition(final int index) {
@@ -1667,6 +1689,7 @@ public class MusicService extends Service {
 
     /**
      * 获取歌曲所属类型
+     *
      * @return
      */
     public String getGenreName() {
@@ -1774,6 +1797,7 @@ public class MusicService extends Service {
 
     /**
      * 调节player的播放进度
+     *
      * @param position
      * @return 调节后的播放进度
      */
@@ -1793,6 +1817,7 @@ public class MusicService extends Service {
 
     /**
      * 基于当前播放进度调整播放位置
+     *
      * @param deltaInMs
      */
     public void seekRelative(long deltaInMs) {
@@ -1882,8 +1907,9 @@ public class MusicService extends Service {
 
     /**
      * 设置播放列表
+     *
      * @param list
-     * @param position -1标志随机播放
+     * @param position   -1标志随机播放
      * @param sourceId
      * @param sourceType
      */
@@ -1929,8 +1955,13 @@ public class MusicService extends Service {
         play(true);
     }
 
+    public void setVolume(float volume) {
+        mPlayer.setVolume(volume);
+    }
+
     /**
      * 播放歌曲
+     *
      * @param createNewNextTrack 设置下个曲目时是否重新产生序号
      */
     public void play(boolean createNewNextTrack) {
@@ -1992,8 +2023,8 @@ public class MusicService extends Service {
             if (mIsSupposedToBePlaying) {
                 notifyChange(META_CHANGED);
                 setIsSupposedToBePlaying(false, true);
-                TimerTask task = new TimerTask(){
-                    public void run(){
+                TimerTask task = new TimerTask() {
+                    public void run() {
                         final Intent intent = new Intent(
                                 AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
                         intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
@@ -2011,6 +2042,7 @@ public class MusicService extends Service {
 
     /**
      * 播放下一首
+     *
      * @param force
      */
     public void gotoNext(final boolean force) {
@@ -2046,6 +2078,7 @@ public class MusicService extends Service {
 
     /**
      * 给mPlayPos设置播放的曲目ID
+     *
      * @param nextPos
      */
     public void setAndRecordPlayPos(int nextPos) {
@@ -2064,6 +2097,7 @@ public class MusicService extends Service {
 
     /**
      * 切换到前一首歌曲
+     *
      * @param forcePrevious
      */
     public void prev(boolean forcePrevious) {
@@ -2096,6 +2130,7 @@ public class MusicService extends Service {
 
     /**
      * 获取播放列表中的前一首歌曲
+     *
      * @param removeFromHistory 是否从历史中删除最近一个播放记录
      * @return
      */
@@ -2128,6 +2163,7 @@ public class MusicService extends Service {
 
     /**
      * 将index1的曲目移动到index2
+     *
      * @param index1
      * @param index2
      */
@@ -2166,8 +2202,9 @@ public class MusicService extends Service {
 
     /**
      * 在播放队列的播放位置的下一个或者末尾插入播放曲目
+     *
      * @param list
-     * @param action NEXT标志在播放位置插入,LAST标志在末尾插入
+     * @param action     NEXT标志在播放位置插入,LAST标志在末尾插入
      * @param sourceId
      * @param sourceType
      */
@@ -2220,6 +2257,7 @@ public class MusicService extends Service {
 
     /**
      * 设置锁屏封面
+     *
      * @param enabled
      */
     public void setLockscreenAlbumArt(boolean enabled) {
@@ -2810,6 +2848,11 @@ public class MusicService extends Service {
         @Override
         public void setLockscreenAlbumArt(boolean enabled) {
             mService.get().setLockscreenAlbumArt(enabled);
+        }
+
+        @Override
+        public void setVolume(float volume) throws RemoteException {
+            mService.get().setVolume(volume);
         }
 
     }

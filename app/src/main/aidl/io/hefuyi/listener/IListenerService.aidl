@@ -49,4 +49,5 @@ interface IListenerService {
         int getMediaMountedCount();
         int getAudioSessionId();
         void setLockscreenAlbumArt(boolean enabled);
+        void setVolume(float volume);
 }
