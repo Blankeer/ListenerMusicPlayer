@@ -55,7 +55,7 @@ public class LyricUtil {
         } else {
             File file2 = new File(getLrcPath(title, artist));
             if (file2.exists()) {
-                return Observable.just(file);
+                return Observable.just(file2);
             }
             return Observable.error(new Throwable("lyric file not exist"));
         }
@@ -67,6 +67,7 @@ public class LyricUtil {
             return getLrcPath(title, artist);
         }
         String mp3Name = mp3File.getName().substring(0, mp3File.getName().lastIndexOf("."));
+//        Log.d("lrc", "mp3Name=" + mp3Name);
         return mp3File.getParentFile().getAbsolutePath() + File.separator + mp3Name + ".lrc";
     }
 
