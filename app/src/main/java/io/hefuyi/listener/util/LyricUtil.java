@@ -42,25 +42,39 @@ public class LyricUtil {
         }
     }
 
-    public static boolean isLrcFileExist(String title, String artist) {
+    public static boolean isLrcFileExist(String title, String artist, String path) {
         File file = new File(getLrcPath(title, artist));
-        return file.exists();
+        File file2 = new File(getLrcPath(title, artist, path));
+        return file.exists() || file2.exists();
     }
 
-    public static Observable<File> getLocalLyricFile(String title, String artist) {
-        File file = new File(getLrcPath(title, artist));
+    public static Observable<File> getLocalLyricFile(String title, String artist, String path) {
+        File file = new File(getLrcPath(title, artist, path));
         if (file.exists()) {
             return Observable.just(file);
-        }else {
+        } else {
+            File file2 = new File(getLrcPath(title, artist));
+            if (file2.exists()) {
+                return Observable.just(file);
+            }
             return Observable.error(new Throwable("lyric file not exist"));
         }
+    }
+
+    private static String getLrcPath(String title, String artist, String path) {
+        File mp3File = new File(path);
+        if (!mp3File.exists()) {
+            return getLrcPath(title, artist);
+        }
+        String mp3Name = mp3File.getName().substring(0, mp3File.getName().lastIndexOf("."));
+        return mp3File.getParentFile().getAbsolutePath() + File.separator + mp3Name + ".lrc";
     }
 
     private static String getLrcPath(String title, String artist) {
         return lrcRootPath + title + " - " + artist + ".lrc";
     }
 
-    public static  String decryptBASE64(String str) {
+    public static String decryptBASE64(String str) {
         if (str == null || str.length() == 0) {
             return null;
         }

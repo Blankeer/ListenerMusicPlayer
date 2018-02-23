@@ -13,7 +13,7 @@ import rx.Observable;
  * Created by hefuyi on 2016/11/7.
  */
 
-public class GetLyric extends UseCase<GetLyric.RequestValues,GetLyric.ResponseValue>{
+public class GetLyric extends UseCase<GetLyric.RequestValues, GetLyric.ResponseValue> {
 
     private Repository mRepository;
 
@@ -25,24 +25,27 @@ public class GetLyric extends UseCase<GetLyric.RequestValues,GetLyric.ResponseVa
     public ResponseValue execute(RequestValues requestValues) {
         String title = requestValues.getTitle();
         String artist = requestValues.getArtist();
+        String path = requestValues.getPath();
         long duration = requestValues.getDuration();
-        if (LyricUtil.isLrcFileExist(title, artist)) {
-            return new ResponseValue(LyricUtil.getLocalLyricFile(title, artist));
-        }else{
+        if (LyricUtil.isLrcFileExist(title, artist, path)) {
+            return new ResponseValue(LyricUtil.getLocalLyricFile(title, artist,path));
+        } else {
             return new ResponseValue(mRepository.downloadLrcFile(title, artist, duration));
         }
     }
 
-    public static final class RequestValues implements UseCase.RequestValues{
+    public static final class RequestValues implements UseCase.RequestValues {
 
         private final String mTitle;
         private final String mArtist;
+        private final String mPath;
         private final long mDuration;
 
-        public RequestValues(@NonNull String title, @NonNull String artist,long duration) {
+        public RequestValues(@NonNull String title, @NonNull String artist, long duration, String path) {
             mTitle = title;
             mArtist = artist;
             mDuration = duration;
+            mPath = path;
         }
 
         public String getTitle() {
@@ -56,6 +59,10 @@ public class GetLyric extends UseCase<GetLyric.RequestValues,GetLyric.ResponseVa
         public long getDuration() {
             return mDuration;
         }
+
+        public String getPath() {
+            return mPath;
+        }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
@@ -66,7 +73,7 @@ public class GetLyric extends UseCase<GetLyric.RequestValues,GetLyric.ResponseVa
             mLyricFile = lyricFile;
         }
 
-        public Observable<File> getLyricFile(){
+        public Observable<File> getLyricFile() {
             return mLyricFile;
         }
     }

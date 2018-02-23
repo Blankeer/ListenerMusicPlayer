@@ -91,10 +91,11 @@ public class QuickControlsPresenter implements QuickControlsContract.Presenter {
         String title = MusicPlayer.getTrackName();
         String artist = MusicPlayer.getArtistName();
         long duration = MusicPlayer.duration();
+        String path = MusicPlayer.getCurrentMusicPath();
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(artist)) {
             return;
         }
-        Subscription subscription = mGetLyric.execute(new GetLyric.RequestValues(title, artist, duration))
+        Subscription subscription = mGetLyric.execute(new GetLyric.RequestValues(title, artist, duration, path))
                 .getLyricFile()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -147,13 +148,13 @@ public class QuickControlsPresenter implements QuickControlsContract.Presenter {
             mView.setArtist(artist);
         }
 
-        if (!mDuetoplaypause){
+        if (!mDuetoplaypause) {
             Glide.with(mView.getContext())
                     .load(ListenerUtil.getAlbumArtUri(MusicPlayer.getCurrentAlbumId()).toString())
                     .asBitmap()
                     .error(ATEUtil.getDefaultAlbumDrawable(mView.getContext()))
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(new SimpleTarget<Bitmap>(){
+                    .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onLoadFailed(Exception e, Drawable errorDrawable) {
                             mView.setAlbumArt(errorDrawable);
