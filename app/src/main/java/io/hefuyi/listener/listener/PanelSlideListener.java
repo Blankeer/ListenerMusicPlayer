@@ -158,6 +158,7 @@ public class PanelSlideListener implements SlidingUpPanelLayout.PanelSlideListen
 
                 switch (mStatus) {
                     case FULLSCREEN:
+                        lyricView.setHighLightTextColor(ATEUtil.getThemeAccentColor(mContext));
                         albumImageDrawable = albumImage.getDrawable();
                         setBlurredAlbumArt();
                 }
