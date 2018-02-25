@@ -736,7 +736,10 @@ public class LyricView extends View {
                  */
                 LineInfo lineInfo = new LineInfo();
                 lineInfo.content = content;
-                lineInfo.start = measureStartTimeMillis(temp);
+                lineInfo.start = measureStartTimeMillis(temp) - lyricInfo.song_offset;
+                if (lineInfo.start < 0) {
+                    lineInfo.start = 0;
+                }
                 lyricInfo.song_lines.add(lineInfo);
             }
         }
